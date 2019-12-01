@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 引入mock.js -->
+  <script src="https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+</head>
+<body>
+  <template id="melonSelect">
+    <style>
+      :host{
+        --themeColor:rgb(24,144,255);
+        box-sizing: border-box;
+        font-size: 14px;
+        --borderColor:#eee;
+      }
+      
+      .melon-select-wrapper{
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding-left: 10px;
+        width: 95px;
+        height: 36px;
+        border: 1px solid var(--borderColor);
+        color: #333;
+        border-radius: 2px;
+        user-select: none;
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+        outline:none
+      }
+      
+      .melon-select-wrapper:hover{
+        border: 1px solid var(--themeColor);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .melon-select-title-wrapper{
+        
+      }
+      
+      .arrow-out{
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(0px) rotateX(0deg);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .melon-select-wrapper.flip>.arrow-out{
+        transform: translateY(-3px) rotateX(180deg);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .arrow{
+        display: flex;
+        width: 6px;
+        height:6px;
+        border: none;
+        border-left: 1px solid #333;
+        border-bottom: 1px solid #333;
+        transform: translateY(-50%) rotateZ(-45deg);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .melon-select-wrapper:hover .arrow{
+        border-left: 1px solid var(--themeColor);
+        border-bottom: 1px solid var(--themeColor);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      
+      
+      .melon-select-list-wrapper{
+        z-index: 100;
+        position: absolute;
+        top: 130%;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        visibility: hidden;
+        min-width: 100%;
+        border-radius: 3px;
+        transform: scale(0);
+        transform-origin: top;
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .melon-select-wrapper.flip>.melon-select-list-wrapper{
+      visibility: visible;
+        transform: scale(1);
+        transition: .3s cubic-bezier(.12, .4, .29, 1.46);
+      }
+      
+      .melon-select-list-item{
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        width: 95px;
+        height: 36px;
+        color: #333;
+        border-radius: 2px;
+        user-select: none;
+        background-color: #fff;
+        transition: background-color .3s ease-in-out;
+      }
+      
+      .melon-select-list-item:hover{
+        background-color: rgba(24,144,255,0.1);
+        transition: background-color .3s ease-in-out;
+      }
+    </style>
+    <div class="melon-select-wrapper" tabindex="1" key="123">
+      <span class="melon-select-title-wrapper"></span>
+      <span class="arrow-out">
+        <span class="arrow"></span>
+      </span>
+      <div class="melon-select-list-wrapper" >
+        <!-- <slot name="melon-option">OPTION MISSING</slot> -->
+      </div>
+    </div>
+  </template>
+
+  <melon-select
+    placeholder="请选择"
+  >
+  </melon-select>
+  <script type="text/javascript">
+    window.onload=function(){
+      const list = [
+        {name: 'melon', value: 1},
+        {name: 'elven', value: 2},
+        {name: 'chenyi', value: 3}
+      ]
+      const setList = function() {
+        console.log('我被调用===>', )
+        document.querySelector('melon-select').setAttribute('list', JSON.stringify(list))
+      }
+      document.querySelector('melon-select').setAttribute('list', JSON.stringify(list))
+    }
+
+  
+  </script>
+</body>
+</html>
